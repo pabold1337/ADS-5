@@ -4,11 +4,11 @@
 
 template<typename T, int size>
 class TStack {
-private:
+ private:
     T arr[size];
     int top_idx;
 
-public:
+ public:
     TStack() : top_idx(-1) {}
 
     void push(T value) {
