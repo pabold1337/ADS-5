@@ -1,6 +1,7 @@
 // Copyright 2025 NNTU-CS
 #include <string>
 #include <map>
+#include <numeric>
 #include "tstack.h"
 
 std::string infx2pstfx(const std::string& inf) {
@@ -65,10 +66,8 @@ int eval(const std::string& pref) {
         if (isdigit(c)) {
             num += c;
         } else if (c == ' ' && !num.empty()) {
-            int number = 0;
-            for (char digit : num) {
-                number = number * 10 + (digit - '0');
-            }
+            int number = std::accumulate(num.begin(), num.end(), 0,
+                [](int acc, char digit) { return acc * 10 + (digit - '0'); });
             stack.push(number);
             num.clear();
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
