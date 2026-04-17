@@ -5,11 +5,17 @@
 template<typename T, int size>
 class TStack {
  private:
-    T arr[size];
+    T* arr;
     int top_idx;
 
  public:
-    TStack() : top_idx(-1) {}
+    TStack() : top_idx(-1) {
+        arr = new T[size];
+    }
+
+    ~TStack() {
+        delete[] arr;
+    }
 
     void push(T value) {
         if (top_idx < size - 1) {
