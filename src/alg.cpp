@@ -58,10 +58,10 @@ std::string infx2pstfx(const std::string& inf) {
 int eval(const std::string& pref) {
     TStack<int, 100> stack;
     std::string num;
-    
+
     for (size_t i = 0; i < pref.length(); i++) {
         char c = pref[i];
-        
+
         if (isdigit(c)) {
             num += c;
         } else if (c == ' ' && !num.empty()) {
