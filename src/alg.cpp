@@ -17,11 +17,9 @@ std::string infx2pstfx(const std::string& inf) {
             }
             result += ' ';
             i--;
-        }
-        else if (c == '(') {
+        } else if (c == '(') {
             stack.push(c);
-        }
-        else if (c == ')') {
+        } else if (c == ')') {
             while (!stack.isEmpty() && stack.get() != '(') {
                 result += stack.pop();
                 result += ' ';
@@ -29,8 +27,7 @@ std::string infx2pstfx(const std::string& inf) {
             if (!stack.isEmpty() && stack.get() == '(') {
                 stack.pop();
             }
-        }
-        else if (c == '+' || c == '-' || c == '*' || c == '/') {
+        } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             int priority = (c == '+' || c == '-') ? 1 : 2;
             while (!stack.isEmpty() && stack.get() != '(') {
                 char top = stack.get();
@@ -61,31 +58,32 @@ std::string infx2pstfx(const std::string& inf) {
 int eval(const std::string& pref) {
     TStack<int, 100> stack;
     std::string num;
-
+    
     for (size_t i = 0; i < pref.length(); i++) {
         char c = pref[i];
-
+        
         if (isdigit(c)) {
             num += c;
-        }
-        else if (c == ' ' && !num.empty()) {
+        } else if (c == ' ' && !num.empty()) {
             int number = 0;
             for (char digit : num) {
                 number = number * 10 + (digit - '0');
             }
             stack.push(number);
             num.clear();
-        }
-        else if (c == '+' || c == '-' || c == '*' || c == '/') {
+        } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             int b = stack.pop();
             int a = stack.pop();
             int res = 0;
-
-            if (c == '+') res = a + b;
-            else if (c == '-') res = a - b;
-            else if (c == '*') res = a * b;
-            else if (c == '/') res = a / b;
-
+            if (c == '+') {
+                res = a + b;
+            } else if (c == '-') {
+                res = a - b;
+            } else if (c == '*') {
+                res = a * b;
+            } else if (c == '/') {
+                res = a / b;
+            }
             stack.push(res);
         }
     }
